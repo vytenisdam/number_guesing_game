@@ -7,7 +7,7 @@ def guess():
     a = input('Make a guess. ')
     return a
 
-num_to_win = random.randint(1,100)
+num_to_win = random.randint(1,1)
 player_lives = 0
 
 print("Welcome to the Number guessing game!")
@@ -22,21 +22,25 @@ else:
     print('You have 10 attempts to guess the number.')
     
 win = False
-
-while win == False:    
-    if int(guess()) == num_to_win:
-        win = True
-        print('You guessed the number.')
-    else:
-        player_lives -= 1
-        if player_lives <= 0:
-            print('You are out of lives.')
+def game():
+    while win == False:
+        current_guess = int(guess())    
+        if current_guess == num_to_win:
+            win = True
+            print('You guessed the number.')
         else:
-            print(f'You have {player_lives} attempts left.')                
-            if int(guess()) < num_to_win:
-                print('Too low.')                       
-            elif int(guess()) > num_to_win:
-                print('Too high.')       
+            player_lives -= 1
+            if player_lives == 0:
+                print('You are out of lives.')
+                break
+            else:                
+                if current_guess < num_to_win:
+                    print('Too low.')
+                    print(f'You have {player_lives} attempts left.')                       
+                elif current_guess > num_to_win:
+                    print('Too high.')
+                    print(f'You have {player_lives} attempts left.')
+game()       
 
 
 
